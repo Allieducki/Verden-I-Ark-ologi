@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.7725316, g: 0.91022146, b: 0.99318427, a: 1}
+  m_IndirectSpecularColor: {r: 0.77201265, g: 0.91026306, b: 0.99453586, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -7603,7 +7603,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueText: {fileID: 1822044955}
-  clip: {fileID: 0}
   dialogName: {fileID: 1242887229}
   animator: {fileID: 1899853653}
 --- !u!4 &249483519
@@ -18626,7 +18625,6 @@ MonoBehaviour:
       du det redskab du har i h\xE5nden og kan samle et nyt op. "
     - "For at klare banen skal du pr\xF8ve at finde alle fundene som er begravet.
       \nTip:  pr\xF8v at fjerne sort jord. "
-    audioClips: []
     name: "Ark\xE6olog S\xF8ren"
   CubeTrigger: {fileID: 0}
 --- !u!65 &572041296

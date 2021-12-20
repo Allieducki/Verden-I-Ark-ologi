@@ -35,6 +35,7 @@ public class GameGrid : MonoBehaviour
 
     public IEnumerator CreateGrid()
     {
+        // This gameGrid is used to store all the tiles in
         gameGrid = new GameObject[height, width, depth];
 
         //CubePrefab.transform.localScale = new Vector3(size, size / 2, size);
@@ -44,6 +45,7 @@ public class GameGrid : MonoBehaviour
             Debug.Log("Error: Grid cell prefab on the game grid not assigned");
             yield return null;
         }
+        // Instantiates 3-dimensional grid of tiles
         for (float y = 0; y < height; y++)
         {
             for (float x = 0; x < width; x++)
@@ -51,16 +53,23 @@ public class GameGrid : MonoBehaviour
 
                 for (float z = 0; z < depth; z++)
                 {
+                    // Top layer
                     if(y == 9)
                     {
                         InstantiateCube(x, y, z, TopLayerPrefab, 0.2f, -90, false);
-                    } else if (y >= 6 && y <= 8)
+                    }
+                    // Lightbrown layer
+                    else if (y >= 6 && y <= 8)
                     {
                         InstantiateCube(x, y, z, LightPrefab, 0, -90, false);
-                    } else if(y >= 3 && y <= 5)
+                    } 
+                    // Brown layer
+                    else if(y >= 3 && y <= 5)
                     {
                         InstantiateCube(x, y, z, CubePrefab, 0, 0, false);
-                    } else if (y >= 0 && y <= 2)
+                    } 
+                    // Darkbrown layer
+                    else if (y >= 0 && y <= 2)
                     {
                         InstantiateCube(x, y, z, DarkPrefab, 0, -90, false);
                     }
@@ -70,6 +79,7 @@ public class GameGrid : MonoBehaviour
 
     }
 
+    // Function used to instantiate every cube
     private void InstantiateCube(float x,float y, float z,GameObject cube, float offset, float rotation, bool artifact)
     {
         gameGrid[(int)x, (int)y, (int)z] = Instantiate(cube, new Vector3(x * gridSpaceSize, (y / 2) * gridSpaceSize - (height /2f-0.5f) + offset, z * gridSpaceSize), Quaternion.Euler(rotation, 0, 0));
@@ -87,12 +97,14 @@ public class GameGrid : MonoBehaviour
         //yield return new WaitForSeconds(.01f);
     }
 
+    // Randomly picks location below the top layer, destroys the current tile in that position and adjacent blocks and
+    // instantiates artifact tiles and "close tiles"
     private void PlaceArtifact(int amount)
     {
         for(int i = 0; i < amount; i++)
         {
             randomX = Random.Range(0, width);
-            randomY = Random.Range(9, 9);
+            randomY = Random.Range(0, height-3);
             randomZ = Random.Range(0, depth);
             Destroy(gameGrid[randomX, randomY, randomZ].gameObject);
             InstantiateCube(randomX, randomY, randomZ, ArtifactPrefab, 0, 0, true);
@@ -177,6 +189,7 @@ public class GameGrid : MonoBehaviour
         }
     }
 
+    // Gets grid position in the world
     public Vector3Int GetGridPosFromWorld(Vector3 worldPosition)
     {
         int x = Mathf.FloorToInt(worldPosition.x / gridSpaceSize);
@@ -189,6 +202,7 @@ public class GameGrid : MonoBehaviour
         return new Vector3Int(x, z, y);
     }
 
+    // Gets world position from grid
     public Vector3 getWorldPositionFromGrid(Vector3Int gridPos)
     {
         float x = gridPos.x * gridSpaceSize;

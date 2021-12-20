@@ -25,10 +25,10 @@ public class MovePlayer : MonoBehaviour
 
 
     Vector3 velocity;
-
+    // Update is called every frame
     void Update()
     {
-
+        // Checks if Player is standing on ground. if not, starts accelerating the velocity downwards to simulate gravity
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
         if(isGrounded && velocity.y < 0)
@@ -40,16 +40,11 @@ public class MovePlayer : MonoBehaviour
         controller.Move(velocity * Time.deltaTime);
 
 
+
+        // Moves the player according to the joystick input
         horizontal = joyStick.Horizontal;
         vertical = joyStick.Vertical;
-
-        /*
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
-
-        */
         Vector3 move = transform.right * horizontal + transform.forward * vertical;
-
         controller.Move(move * Time.deltaTime * speed);
 
 
