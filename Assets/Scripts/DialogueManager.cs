@@ -10,12 +10,14 @@ public class DialogueManager : MonoBehaviour
     public Text dialogName;
     public Animator animator;
     private Queue<string> sentences;
+
+    // Start is called when scene is loaded
     void Start()
     {
         sentences = new Queue<string>();
     }
 
-
+    // Starts the dialogue when dialogue trigger has been triggered
     public void StartDialogue(Dialogue dialogue) 
     {
         
@@ -28,12 +30,12 @@ public class DialogueManager : MonoBehaviour
         {
             sentences.Enqueue(sentence);
         }
-        //Time.timeScale = 0;
         DisplayNextSentence();
         
         
     }
 
+    // Changes the dialogue text to the next sentence
     public void DisplayNextSentence() 
     {
         if (sentences.Count == 0)
@@ -45,9 +47,9 @@ public class DialogueManager : MonoBehaviour
         StopAllCoroutines();
 
         StartCoroutine(TypeSentence(sentence));
-        //dialogueText.text = sentence;
     }
 
+    // Types out the sentences letter by letter with a Coroutine
     IEnumerator TypeSentence (string sentence) 
     {
         dialogueText.text = "";
@@ -57,6 +59,8 @@ public class DialogueManager : MonoBehaviour
             yield return null;
         }
     }
+
+    //ends the dialogue
    void EndDialogue() 
     {
         Time.timeScale = 1;

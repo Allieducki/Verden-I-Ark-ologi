@@ -50,7 +50,6 @@ public class GameGrid : MonoBehaviour
         {
             for (float x = 0; x < width; x++)
             {
-
                 for (float z = 0; z < depth; z++)
                 {
                     // Top layer
@@ -79,13 +78,13 @@ public class GameGrid : MonoBehaviour
 
     }
 
-    // Function used to instantiate every cube
+    // Method used to instantiate every cube. refactored to reusable method
     private void InstantiateCube(float x,float y, float z,GameObject cube, float offset, float rotation, bool artifact)
     {
-        gameGrid[(int)x, (int)y, (int)z] = Instantiate(cube, new Vector3(x * gridSpaceSize, (y / 2) * gridSpaceSize - (height /2f-0.5f) + offset, z * gridSpaceSize), Quaternion.Euler(rotation, 0, 0));
+        gameGrid[(int)x, (int)y, (int)z] = Instantiate(cube, new Vector3(x * gridSpaceSize, (y / 2) * gridSpaceSize - 
+            (height /2f-0.5f) + offset, z * gridSpaceSize), Quaternion.Euler(rotation, 0, 0));
         gameGrid[(int)x, (int)y, (int)z].GetComponent<GridCell>().SetPosition((int)x, (int)y, (int)z);
         gameGrid[(int)x, (int)y, (int)z].transform.parent = transform;
-        // gameGrid[(int)x, (int)y, (int)z].gameObject.tag = "Interactable";
         if (!artifact)
         {
             gameGrid[(int)x, (int)y, (int)z].gameObject.name = "Tile";
@@ -93,8 +92,6 @@ public class GameGrid : MonoBehaviour
         {
             gameGrid[(int)x, (int)y, (int)z].gameObject.name = "Artifact";
         }
-        
-        //yield return new WaitForSeconds(.01f);
     }
 
     // Randomly picks location below the top layer, destroys the current tile in that position and adjacent blocks and
@@ -104,7 +101,7 @@ public class GameGrid : MonoBehaviour
         for(int i = 0; i < amount; i++)
         {
             randomX = Random.Range(0, width);
-            randomY = Random.Range(0, height-3);
+            randomY = Random.Range(9, 9);
             randomZ = Random.Range(0, depth);
             Destroy(gameGrid[randomX, randomY, randomZ].gameObject);
             InstantiateCube(randomX, randomY, randomZ, ArtifactPrefab, 0, 0, true);
@@ -189,7 +186,7 @@ public class GameGrid : MonoBehaviour
         }
     }
 
-    // Gets grid position in the world
+    // Gets grid position in the world. can be used for later iterations
     public Vector3Int GetGridPosFromWorld(Vector3 worldPosition)
     {
         int x = Mathf.FloorToInt(worldPosition.x / gridSpaceSize);
@@ -202,7 +199,7 @@ public class GameGrid : MonoBehaviour
         return new Vector3Int(x, z, y);
     }
 
-    // Gets world position from grid
+    // Gets world position from grid. can be used for later iterations
     public Vector3 getWorldPositionFromGrid(Vector3Int gridPos)
     {
         float x = gridPos.x * gridSpaceSize;
@@ -210,8 +207,6 @@ public class GameGrid : MonoBehaviour
         float z = gridPos.z * gridSpaceSize;
 
         return new Vector3(x, y, z);
-
-
     }
 
 }

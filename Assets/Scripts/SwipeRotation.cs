@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//First iteration of camera movement
 public class SwipeRotation : MonoBehaviour
 {
 

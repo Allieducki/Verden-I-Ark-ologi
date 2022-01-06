@@ -20,23 +20,20 @@ public class PauseMenu : MonoBehaviour
 
     public static bool MenuButtonPressed = false;
 
+    // sets pause screen to be active
     public void SetPanelActive() 
     {
         pauseGameUi.SetActive(true);
     }
   
-
+    // Loads main menu from pause screen
     public void MainMenu() 
     {
 
         SceneManager.LoadScene(0);
     }
 
-    private void Start()
-    {
-       
-    }
-
+    // if pausing, pause gameplay
     void Update()
     {
 

@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+
+// First attempt at pickup method with interactable extension
 public class ItemPickup : Interactable
 {
     public Transform theDest;

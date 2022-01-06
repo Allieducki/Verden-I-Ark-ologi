@@ -19,7 +19,6 @@ public class InputManager : MonoBehaviour
     void Update()
     {
         GridCell cellMouseIsOver = isMouseOverAGridSpace();
-        //Vector3 vec = GameGrid.getWorldPositionFromGrid(cellMouseIsOver.GetPosition() - cellMouseIsOver.GetY());
         if (cellMouseIsOver != null)
         {
             

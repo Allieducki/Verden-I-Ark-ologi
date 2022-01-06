@@ -64,12 +64,12 @@ public class RayCastScript : MonoBehaviour
                         artifactsFound += 1;
                         artifactsText.text = "Fund fundet: " + artifactsFound;
                         artifactAmount -= 1;
-
                         //if artifactAmount = 0 you win the game
                         if(artifactAmount == 0)
                         {
                             float endTime = Mathf.Round((Time.time - startTime)*100f)/100f;
-                            victoryText.text = "DU VANDT!\n\nDu fandt: " + artifactsFound + " Fund\n\nTid: " + endTime + " Sekunder";
+                            victoryText.text = "DU VANDT!\n\nDu fandt: " + artifactsFound + 
+                                " Fund\n\nTid: " + endTime + " Sekunder";
                             victoryScreen.gameObject.SetActive(true);
                         }
                     }
@@ -77,6 +77,9 @@ public class RayCastScript : MonoBehaviour
                 }
                 if (itemPick.gameObject.transform.name == "Shovel")
                 {
+                    DestroyObject(hit.transform.gameObject);
+                    DestroyObject(GameGrid.gameGrid[position.x, position.y - 1, position.z].gameObject);
+
                     diggingSound.Play();
                     if (hit.transform.gameObject.name == "Artifact")
                     {
@@ -90,8 +93,6 @@ public class RayCastScript : MonoBehaviour
                             Debug.Log("YOU WIN");
                         }
                     }
-                    DestroyObject(hit.transform.gameObject);
-                    DestroyObject(GameGrid.gameGrid[position.x, position.y - 1, position.z].gameObject);
                 }
             }
         }
@@ -161,32 +162,10 @@ public class RayCastScript : MonoBehaviour
             {
                 SetFocus();
             }
-
-            
-
-            //TODO Add switch for different tags to reference
-            /* if (Input.GetKeyDown("space") && tag !=null)
-            {
-                switch (tag)
-                {
-                    case "Interactable":
-
-                        break;
-                    case "Digsite":
-                        DestroyObject(hit.transform.gameObject);
-                        break;
-                }
-            }*/
-
-            
-
-            Debug.DrawLine(ray.origin, hit.point, Color.red);
-
-            
+            Debug.DrawLine(ray.origin, hit.point, Color.red);  
         }
         else
         {
-
             Debug.DrawLine(ray.origin, ray.origin + ray.direction * rayDistance, Color.green);
             if (hasInteracted == true)
             {
@@ -204,10 +183,7 @@ public class RayCastScript : MonoBehaviour
 
     void SetFocus()
     {
-
-        
         defaultColor = hit.transform.gameObject.GetComponent<Renderer>().material.color;
-        
         var selectionRenderer = hit.transform.GetComponent<Renderer>();
         if (selectionRenderer != null)
         {
@@ -222,12 +198,5 @@ public class RayCastScript : MonoBehaviour
         var selectionRenderer = col.transform.GetComponent<Renderer>();
         selectionRenderer.material.color = defaultColor;
         hasInteracted = false;
-    }
-
-    void Tools(GameObject itemToUse) 
-    {
-    
-    
-
     }
 }

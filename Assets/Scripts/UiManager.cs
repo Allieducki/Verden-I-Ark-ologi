@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
+//Test to try to make floating text in hub world
 public class UiManager : MonoBehaviour
 {
 

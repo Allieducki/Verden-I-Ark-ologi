@@ -23,11 +23,6 @@ public class PauseMenuManager : MonoBehaviour
 
     }
 
-    void Update()
-    {
-        
-    }
-
     public void Resume() 
     {
         panelActive.SetActive(false);
@@ -37,11 +32,9 @@ public class PauseMenuManager : MonoBehaviour
     
     }
 
-   
     public void QuitGame() 
     {
         SceneManager.LoadScene("Main Menu");
-    
     }
 
 }

@@ -19,12 +19,8 @@ public class MovePlayer : MonoBehaviour
 
     float vertical = 0f;
     float horizontal = 0f;
-
-
-
-
-
     Vector3 velocity;
+
     // Update is called every frame
     void Update()
     {
@@ -39,15 +35,10 @@ public class MovePlayer : MonoBehaviour
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
 
-
-
         // Moves the player according to the joystick input
         horizontal = joyStick.Horizontal;
         vertical = joyStick.Vertical;
         Vector3 move = transform.right * horizontal + transform.forward * vertical;
         controller.Move(move * Time.deltaTime * speed);
-
-
-
     }
 }
